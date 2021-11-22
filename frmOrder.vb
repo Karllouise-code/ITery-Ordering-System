@@ -175,48 +175,36 @@ Public Class frmOrder
             MessageBox.Show("Please Add Order!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             Try
-                Dim isEqual = False
                 txtRefno.Text = (Rnd() * Rnd() * 32676)
-                Using cmd As New OleDbCommand("SELECT COUNT(*) FROM tblOrders WHERE [Order_Ref_No] = @Order_Ref_No", con)
-                    cmd.Parameters.AddWithValue("@Order_Ref_No", OleDbType.VarChar).Value = txtRefno.Text
-                    Dim count = Convert.ToInt32(cmd.ExecuteScalar())
-                    If count > 0 Then
-                        isEqual = True
-                        txtRefno.Text = Rnd() * Rnd() * 32676
-                        Exit Sub
-                    Else
-                        isEqual = False
-                        'FORMULA TO MULTIPLY VALUE OF PRICE TO THE QUANTITY
-                        txtSubTotal1.Text = txtPrice1.Text * txtQty1.Text
-                        txtSubTotal2.Text = txtPrice2.Text * txtQty2.Text
-                        txtSubTotal3.Text = txtPrice3.Text * txtQty3.Text
-                        txtSubTotal4.Text = txtPrice4.Text * txtQty4.Text
-                        txtSubTotal5.Text = txtPrice5.Text * txtQty5.Text
+                'FORMULA TO MULTIPLY VALUE OF PRICE TO THE QUANTITY
+                txtSubTotal1.Text = txtPrice1.Text * txtQty1.Text
+                txtSubTotal2.Text = txtPrice2.Text * txtQty2.Text
+                txtSubTotal3.Text = txtPrice3.Text * txtQty3.Text
+                txtSubTotal4.Text = txtPrice4.Text * txtQty4.Text
+                txtSubTotal5.Text = txtPrice5.Text * txtQty5.Text
 
-                        'GROUPBOX 3 - Order_Sub_Total, Tax, & Total TEXTBOXES
-                        txtOrderSubTotal.Text = Val(txtSubTotal1.Text) + Val(txtSubTotal2.Text) + Val(txtSubTotal3.Text) + Val(txtSubTotal4.Text) + Val(txtSubTotal5.Text)
-                        txtTax.Text = (txtOrderSubTotal.Text * iTax) / 100
-                        txtTotal.Text = Val(txtTax.Text) + Val(txtOrderSubTotal.Text)
+                'GROUPBOX 3 - Order_Sub_Total, Tax, & Total TEXTBOXES
+                txtOrderSubTotal.Text = Val(txtSubTotal1.Text) + Val(txtSubTotal2.Text) + Val(txtSubTotal3.Text) + Val(txtSubTotal4.Text) + Val(txtSubTotal5.Text)
+                txtTax.Text = (txtOrderSubTotal.Text * iTax)
+                txtTotal.Text = Val(txtTax.Text) + Val(txtOrderSubTotal.Text)
 
-                        'FORMAT CURRENCY
-                        txtPrice1.Text = FormatCurrency(txtPrice1.Text)
-                        txtPrice2.Text = FormatCurrency(txtPrice2.Text)
-                        txtPrice3.Text = FormatCurrency(txtPrice3.Text)
-                        txtPrice4.Text = FormatCurrency(txtPrice4.Text)
-                        txtPrice5.Text = FormatCurrency(txtPrice5.Text)
+                'FORMAT CURRENCY
+                txtPrice1.Text = FormatCurrency(txtPrice1.Text)
+                txtPrice2.Text = FormatCurrency(txtPrice2.Text)
+                txtPrice3.Text = FormatCurrency(txtPrice3.Text)
+                txtPrice4.Text = FormatCurrency(txtPrice4.Text)
+                txtPrice5.Text = FormatCurrency(txtPrice5.Text)
 
-                        txtSubTotal1.Text = FormatCurrency(txtSubTotal1.Text)
-                        txtSubTotal2.Text = FormatCurrency(txtSubTotal2.Text)
-                        txtSubTotal3.Text = FormatCurrency(txtSubTotal3.Text)
-                        txtSubTotal4.Text = FormatCurrency(txtSubTotal4.Text)
-                        txtSubTotal5.Text = FormatCurrency(txtSubTotal5.Text)
+                txtSubTotal1.Text = FormatCurrency(txtSubTotal1.Text)
+                txtSubTotal2.Text = FormatCurrency(txtSubTotal2.Text)
+                txtSubTotal3.Text = FormatCurrency(txtSubTotal3.Text)
+                txtSubTotal4.Text = FormatCurrency(txtSubTotal4.Text)
+                txtSubTotal5.Text = FormatCurrency(txtSubTotal5.Text)
 
-                        txtOrderSubTotal.Text = FormatCurrency(txtOrderSubTotal.Text)
-                        txtTax.Text = FormatCurrency(txtTax.Text)
-                        txtTotal.Text = FormatCurrency(txtTotal.Text)
-                        con.Close()
-                    End If
-                End Using
+                txtOrderSubTotal.Text = FormatCurrency(txtOrderSubTotal.Text)
+                txtTax.Text = FormatCurrency(txtTax.Text)
+                txtTotal.Text = FormatCurrency(txtTotal.Text)
+                con.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
             End Try

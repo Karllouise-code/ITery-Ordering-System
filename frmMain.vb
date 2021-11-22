@@ -1,6 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class frmMain
 
+    'CASHIER ID FUNCTION
     Private Sub cashierID(Optional ByVal q As String = "")
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -20,6 +21,7 @@ Public Class frmMain
         con.Close()
     End Sub
 
+    'FULLNAME OF CASHIER FUNCTION
     Private Sub cashierName(Optional ByVal q As String = "")
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -39,21 +41,25 @@ Public Class frmMain
         con.Close()
     End Sub
 
+    'LOADER
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call cashierName()
         Call cashierID()
     End Sub
 
+    'BUTTON CUSTOMER
     Private Sub btnCustomer_Click(sender As Object, e As EventArgs) Handles btnCustomer.Click
         Me.Hide()
         frmCustomer.Show()
     End Sub
 
+    'BUTTON ORDER
     Private Sub btnOrder_Click(sender As Object, e As EventArgs) Handles btnOrder.Click
         Me.Hide()
         frmOrder.Show()
     End Sub
 
+    'BUTTON LOGOUT
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         frmLogin.txtUsername.Clear()
         frmLogin.txtPassword.Clear()

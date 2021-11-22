@@ -1,9 +1,5 @@
 ﻿Imports System.Data.OleDb
 Public Class frmLogin
-    ' Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    query.Connection = con
-    '   OpenCon()
-    'End Sub
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Hide()
         frmDashboard.Show()
@@ -16,10 +12,11 @@ Public Class frmLogin
         If txtUsername.Text = "" Or txtPassword.Text = "" Then
             MessageBox.Show("Please Enter Empty Fields")
         Else
+
+            'CHECKS ON DATABASE IF USERNAME EXIST
             Using login As New OleDbCommand("SELECT COUNT(*) FROM tblUsers WHERE [Username] = @Username AND [Password] = @Password", con)
                 login.Parameters.AddWithValue("@Username", OleDbType.VarChar).Value = txtUsername.Text.Trim
                 login.Parameters.AddWithValue("@Password", OleDbType.VarChar).Value = txtPassword.Text.Trim
-
                 Dim loginCount = Convert.ToInt32(login.ExecuteScalar())
                 If loginCount > 0 Then
                     Me.Hide()

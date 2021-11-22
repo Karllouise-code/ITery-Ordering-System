@@ -148,6 +148,7 @@ Public Class frmCustomer
             If txtSearch.Text = "" Or txtCustomername.Text = "" Or txtCustomerphone.Text = "" Or txtOrderdate.Text = "" Or txtOrdertime.Text = "" Then
                 MessageBox.Show("Please input empty fields!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
+                'CHECK IF CUSTOMERID IS EXIST ON DATABASE
                 Using cmd As New OleDbCommand("SELECT COUNT(*) FROM tblOrders WHERE [Customer_ID] = @Customer_ID", con)
                     cmd.Parameters.AddWithValue("@Customer_ID", OleDbType.VarChar).Value = txtSearch.Text.Trim
                     Dim count = Convert.ToInt32(cmd.ExecuteScalar())
@@ -186,6 +187,7 @@ Public Class frmCustomer
             MessageBox.Show("Please input a Customer ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             Try
+                ''CHECK IF CUSTOMERID IS EXIST ON DATABASE
                 Using cmd As New OleDbCommand("SELECT COUNT(*) FROM tblOrders WHERE [Customer_ID] = @Customer_ID", con)
                     cmd.Parameters.AddWithValue("@Customer_ID", OleDbType.VarChar).Value = txtSearch.Text.Trim
                     Dim count = Convert.ToInt32(cmd.ExecuteScalar())
@@ -217,15 +219,19 @@ Public Class frmCustomer
                 MessageBox.Show("Please input value on Search Field", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             ElseIf Integer.TryParse(txtSearch.Text, vbNull) Then
                 Call RefreshTables()
-            Else
-                Call searchDate()
-                Call searchRef()
+            ElseIf txtSearch.Text.IndexOf("/") = -1 And txtSearch.Text.IndexOf(".") = -1 Then
                 Call searchName()
+            ElseIf txtSearch.Text.IndexOf("/") Then
+                Call searchDate()
+                ' ElseIf txtSearch.Text.IndexOf(".") Then
+                '   Call searchRef()
             End If
             txtSearch.Clear()
+            con.Close()
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
         End Try
+        con.Close()
     End Sub
 
     'TEXT CHANGE ORDER DATE/TIME WHEN TYPING ON TXTCUSTOMER NAME

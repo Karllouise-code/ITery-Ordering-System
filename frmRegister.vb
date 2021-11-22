@@ -1,9 +1,6 @@
 ﻿Imports System.Data.OleDb
 
 Public Class frmRegister
-    '   Private Sub frmRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '      query.Connection = con
-    ' End Sub
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -22,7 +19,7 @@ Public Class frmRegister
                 End If
             End Using
 
-            'If Username & Password is available
+            'If Username is available
             Using create As New OleDbCommand("INSERT INTO tblUsers([Fullname], [Username], [Password]) VALUES(@Fullname, @Username, @Password)", con)
                 If txtPassword.Text = txtConfirmPassword.Text Then
                     create.Parameters.AddWithValue("@Fullname", OleDbType.VarChar).Value = txtFullName.Text.Trim
