@@ -9,7 +9,7 @@ Public Class frmCustomer
                 OpenCon()
             End If
             query.Connection = con
-            query.CommandText = "SELECT Customer_ID,Customer_Name,Customer_Phone,Order_Date,Order_Time FROM tblOrders"
+            query.CommandText = "SELECT * FROM tblOrders"
             adapter.SelectCommand = query
             dt.Clear()
             adapter.Fill(dt)
@@ -244,5 +244,10 @@ Public Class frmCustomer
     Private Sub txtCustomerphone_TextChanged(sender As Object, e As EventArgs) Handles txtCustomerphone.TextChanged
         txtOrderdate.Text = Today
         txtOrdertime.Text = TimeOfDay
+    End Sub
+
+    Private Sub btnOrderIns_Click(sender As Object, e As EventArgs) Handles btnOrderIns.Click
+        Me.Hide()
+        frmOrder.Show()
     End Sub
 End Class

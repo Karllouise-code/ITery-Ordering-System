@@ -40,6 +40,7 @@ Partial Class frmCustomer
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.btnSearch = New System.Windows.Forms.Button()
+        Me.btnOrderIns = New System.Windows.Forms.Button()
         Customer_NameLabel1 = New System.Windows.Forms.Label()
         Customer_PhoneLabel1 = New System.Windows.Forms.Label()
         Order_DateLabel1 = New System.Windows.Forms.Label()
@@ -226,11 +227,22 @@ Partial Class frmCustomer
         Me.btnSearch.Text = "&Search"
         Me.btnSearch.UseVisualStyleBackColor = True
         '
+        'btnOrderIns
+        '
+        Me.btnOrderIns.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnOrderIns.Location = New System.Drawing.Point(25, 486)
+        Me.btnOrderIns.Name = "btnOrderIns"
+        Me.btnOrderIns.Size = New System.Drawing.Size(117, 26)
+        Me.btnOrderIns.TabIndex = 39
+        Me.btnOrderIns.Text = "&Add Order Intead"
+        Me.btnOrderIns.UseVisualStyleBackColor = True
+        '
         'frmCustomer
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(902, 524)
+        Me.Controls.Add(Me.btnOrderIns)
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.btnLoad)
         Me.Controls.Add(Me.txtOrdertime)
@@ -272,4 +284,5 @@ Partial Class frmCustomer
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btnLoad As Button
     Friend WithEvents btnSearch As Button
+    Friend WithEvents btnOrderIns As Button
 End Class

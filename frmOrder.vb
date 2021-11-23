@@ -2,6 +2,7 @@
 Public Class frmOrder
     Dim iTax = 0.2
     Dim isSave = False
+
     'LOAD TABLES FUNCTION
     Private Sub LoadTables(Optional ByVal q As String = "")
         Try
@@ -9,7 +10,7 @@ Public Class frmOrder
                 OpenCon()
             End If
             query.Connection = con
-            query.CommandText = "SELECT Order_Ref_No,Customer_ID,Customer_Name,Customer_Phone,Order_Date,Order_Time,Qty_Spaghetti,Qty_Burger,Qty_Fries, Qty_Cola,Qty_Rice,Price_Spaghetti,Price_Burger,Price_Fries,Price_Cola,Price_Rice,Order_Sub_Total,Tax,Total FROM tblOrders"
+            query.CommandText = "SELECT * FROM tblOrders"
             adapter.SelectCommand = query
             dt.Clear()
             adapter.Fill(dt)
@@ -78,6 +79,12 @@ Public Class frmOrder
         con.Close()
     End Sub
 
+    'PRINT PAGE FUNCTION
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        e.Graphics.DrawString(txtReceipt.Text, Font, Brushes.Black, 140, 140)
+        e.Graphics.DrawImage(frmDashboard.PictureBox2.Image, 120, 130, frmDashboard.PictureBox2.Width - 60, frmDashboard.PictureBox2.Height)
+    End Sub
+
     'LOADER
     Private Sub frmOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         TabPage3.Enabled = False
@@ -106,18 +113,13 @@ Public Class frmOrder
         txtTotal.Text = "0"
     End Sub
 
-    'LOAD BUTTON
+
+    'BUTTON REFRESH
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         Call LoadTables()
     End Sub
 
-    'BACK BUTTON
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Me.Hide()
-        frmMain.Show()
-    End Sub
-
-    'RESET BUTTON
+    'BUTTON RESET
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
         TabControl1.SelectedTab = TabPage1
         txtCustomerID.Text = ""
@@ -166,7 +168,7 @@ Public Class frmOrder
         txtReceipt.Text = ""
     End Sub
 
-    'TOTAL BUTTON
+    'BUTTON TOTAL
     Private Sub btnTotal_Click(sender As Object, e As EventArgs) Handles btnTotal.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -212,7 +214,7 @@ Public Class frmOrder
         End If
     End Sub
 
-    'SAVE BUTTON
+    'BUTTON SAVE
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -251,7 +253,7 @@ Public Class frmOrder
         End If
     End Sub
 
-    'DELIVERED BUTTON
+    'BUTTON DELIVERED
     Private Sub btnDelivered_Click(sender As Object, e As EventArgs) Handles btnDelivered.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -284,8 +286,8 @@ Public Class frmOrder
         End If
     End Sub
 
-    'CHECK BUTTON
-    Private Sub btnPrint2_Click(sender As Object, e As EventArgs) Handles btnPrint2.Click
+    'BUTTON ADD CART
+    Private Sub btnAddcart_Click(sender As Object, e As EventArgs) Handles btnAddcart.Click
         If txtCustomerID.Text = "" Then
             MessageBox.Show("Please input a Customer ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         ElseIf isSave = False Then
@@ -302,8 +304,8 @@ Public Class frmOrder
         End If
     End Sub
 
-    'PRINT BUTTON
-    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+    'BUTTON CHECK
+    Private Sub btnCheck_Click(sender As Object, e As EventArgs) Handles btnCheck.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
         End If
@@ -320,34 +322,43 @@ Public Class frmOrder
                         TabControl1.SelectedTab = TabPage2
                         txtOrdertime.Text = TimeOfDay
 
-                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "ITERY ORDERING SYSTEM" + vbNewLine)
-                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "Cashier Name: " & frmMain.lblUsername.Text)
-
-                        txtReceipt.AppendText(vbTab + vbTab + vbTab & "=============================================================================" + vbNewLine)
                         txtReceipt.AppendText("" + vbNewLine)
-                        txtReceipt.AppendText("Name: " & txtCustname.Text + vbTab + vbTab + "Phone No: " & txtCustphone.Text + vbTab +
-                                   "Ref No: " & txtRef.Text + vbNewLine)
+                        txtReceipt.AppendText("" + vbNewLine)
+                        txtReceipt.AppendText("" + vbNewLine)
+                        txtReceipt.AppendText("" + vbNewLine)
+                        txtReceipt.AppendText("" + vbNewLine)
 
-                        txtReceipt.AppendText(vbNewLine + "Order Date:" + vbTab & txtOrderdate.Text + vbTab + vbTab + "Order Time: " +
-                                  vbTab & txtOrdertime.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + "Item " + vbTab & "           Quantity: " + vbTab + vbTab & "Price: " + vbTab + vbTab & "Sub Total: " + vbNewLine)
+                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab + vbTab & "ITERY ORDERING SYSTEM" + vbNewLine)
+                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "     Your Convenient Online Ordering System" + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab + vbTab & "     Trojan Building, Plaza Limaco, Poblacion" + vbNewLine)
+                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "                 4024, Binan City, Laguna" + vbNewLine)
+                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "                 TIN#: 978-971-134309-5" + vbNewLine)
+                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "              Cashier Name: " & frmMain.lblUsername.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "===============================================================================================" + vbNewLine)
+                        txtReceipt.AppendText("" + vbNewLine)
+                        txtReceipt.AppendText("Cashier Name: " & frmMain.lblUsername.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Customer Name: " & txtCustname.Text + vbTab + vbTab + vbTab + "Phone No: " & txtCustphone.Text + vbTab +
+                                  vbTab + vbTab + "Ref No: " & txtRef.Text + vbNewLine)
 
-                        txtReceipt.AppendText(vbNewLine + "Spaghetti: " + vbTab & txtQ1.Text + vbTab + vbTab & txtP1.Text + vbTab +
-                                  vbTab & txtST1.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + "Burger: " + vbTab + vbTab & txtQ2.Text + vbTab + vbTab & txtP2.Text + vbTab +
-                                  vbTab & txtST2.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + "Fries: " + vbTab + vbTab & txtQ3.Text + vbTab + vbTab & txtP3.Text + vbTab +
-                                  vbTab & txtST3.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + "Cola: " + vbTab + vbTab & txtQ4.Text + vbTab + vbTab & txtP4.Text + vbTab +
-                                  vbTab & txtST4.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + "Rice: " + vbTab + vbTab & txtQ5.Text + vbTab + vbTab & txtP5.Text + vbTab +
-                                  vbTab & txtST5.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Order Date: " & txtOrderdate.Text + vbTab + vbTab + "Order Time: " & txtOrdertime.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Item " + vbTab + vbTab & "           Quantity: " + vbTab + vbTab + vbTab & "Price: " + vbTab + vbTab + vbTab & "Sub Total: " + vbNewLine)
 
-                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab & "Order Sub Total: " + vbTab & txtOST.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab & "Tax On Order: " + vbTab & txtTx.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab & "Net Total: " + vbTab & txtTtl.Text + vbNewLine)
-                        txtReceipt.AppendText(vbNewLine + "=============================================================================" + vbNewLine)
-                        txtReceipt.AppendText(vbTab + vbTab + vbTab + vbTab & "ITERY ORDERS RECEIPT" + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Spaghetti: " + vbTab + vbTab & txtQ1.Text + vbTab + vbTab + vbTab & txtP1.Text + vbTab +
+                                  vbTab + vbTab & txtST1.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Burger: " + vbTab + vbTab + vbTab & txtQ2.Text + vbTab + vbTab + vbTab & txtP2.Text + vbTab +
+                                 vbTab + vbTab & txtST2.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Fries: " + vbTab + vbTab + vbTab & txtQ3.Text + vbTab + vbTab + vbTab & txtP3.Text + vbTab +
+                                  vbTab + vbTab & txtST3.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Cola: " + vbTab + vbTab + vbTab & txtQ4.Text + vbTab + vbTab + vbTab & txtP4.Text + vbTab +
+                                 vbTab + vbTab & txtST4.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "Rice: " + vbTab + vbTab + vbTab & txtQ5.Text + vbTab + vbTab + vbTab & txtP5.Text + vbTab +
+                                 vbTab + vbTab & txtST5.Text + vbNewLine)
+
+                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab + vbTab + vbTab & "Order Sub Total: " + vbTab & txtOST.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab + vbTab + vbTab & "Tax On Order: " + vbTab & txtTx.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab + vbTab + vbTab & "Net Total: " + vbTab & txtTtl.Text + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + "===============================================================================================" + vbNewLine)
+                        txtReceipt.AppendText(vbNewLine + vbTab + vbTab + vbTab + vbTab + vbTab & "ITERY ORDERS RECEIPT" + vbNewLine)
                         TabPage3.Enabled = False
                         con.Close()
                         Exit Sub
@@ -361,5 +372,23 @@ Public Class frmOrder
             con.Close()
         End If
         con.Close()
+    End Sub
+
+    'BUTTON PRINT
+    Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        PrintPreviewDialog1.ShowDialog()
+    End Sub
+
+
+    'BUTTON BACK
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Me.Hide()
+        frmMain.Show()
+    End Sub
+
+    'BUTTON ADD CUSTOMER INSTEAD
+    Private Sub btnCustomerIns_Click(sender As Object, e As EventArgs) Handles btnCustomerIns.Click
+        Me.Hide()
+        frmCustomer.Show()
     End Sub
 End Class

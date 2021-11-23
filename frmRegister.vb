@@ -1,6 +1,8 @@
 ﻿Imports System.Data.OleDb
 
 Public Class frmRegister
+
+    'BUTTON REGISTER
     Private Sub btnRegister_Click(sender As Object, e As EventArgs) Handles btnRegister.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -41,14 +43,16 @@ Public Class frmRegister
         End If
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.Hide()
-        frmDashboard.Show()
-    End Sub
-
+    'BUTTON LOGIN INSTEAD
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Me.Hide()
         frmLogin.Show()
+    End Sub
+
+    'BUTTON CANCEL
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Me.Hide()
+        frmDashboard.Show()
     End Sub
 
 End Class

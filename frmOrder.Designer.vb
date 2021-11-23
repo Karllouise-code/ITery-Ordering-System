@@ -22,6 +22,7 @@ Partial Class frmOrder
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOrder))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.txtCashierID = New System.Windows.Forms.TextBox()
@@ -51,7 +52,7 @@ Partial Class frmOrder
         Me.txtSubTotal1 = New System.Windows.Forms.TextBox()
         Me.btnTotal = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnPrint = New System.Windows.Forms.Button()
+        Me.btnCheck = New System.Windows.Forms.Button()
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnDelivered = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -115,7 +116,12 @@ Partial Class frmOrder
         Me.btnBack = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.txtCustomerID = New System.Windows.Forms.TextBox()
-        Me.btnPrint2 = New System.Windows.Forms.Button()
+        Me.btnAddcart = New System.Windows.Forms.Button()
+        Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
+        Me.PrintPreviewDialog1 = New System.Windows.Forms.PrintPreviewDialog()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.btnCustomerIns = New System.Windows.Forms.Button()
+        Me.btnPrint = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -144,7 +150,7 @@ Partial Class frmOrder
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1038, 78)
+        Me.Panel1.Size = New System.Drawing.Size(1160, 78)
         Me.Panel1.TabIndex = 2
         '
         'txtCashierID
@@ -420,16 +426,16 @@ Partial Class frmOrder
         Me.btnSave.Text = "&Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'btnPrint
+        'btnCheck
         '
-        Me.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(9, 7)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(85, 30)
-        Me.btnPrint.TabIndex = 31
-        Me.btnPrint.Text = "&Print"
-        Me.btnPrint.UseVisualStyleBackColor = True
+        Me.btnCheck.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCheck.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCheck.Location = New System.Drawing.Point(8, 17)
+        Me.btnCheck.Name = "btnCheck"
+        Me.btnCheck.Size = New System.Drawing.Size(85, 30)
+        Me.btnCheck.TabIndex = 31
+        Me.btnCheck.Text = "&Check"
+        Me.btnCheck.UseVisualStyleBackColor = True
         '
         'btnReset
         '
@@ -438,7 +444,7 @@ Partial Class frmOrder
         Me.btnReset.Location = New System.Drawing.Point(27, 383)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(79, 38)
-        Me.btnReset.TabIndex = 30
+        Me.btnReset.TabIndex = 34
         Me.btnReset.Text = "&Reset"
         Me.btnReset.UseVisualStyleBackColor = True
         '
@@ -446,10 +452,10 @@ Partial Class frmOrder
         '
         Me.btnDelivered.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnDelivered.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelivered.Location = New System.Drawing.Point(246, 464)
+        Me.btnDelivered.Location = New System.Drawing.Point(298, 461)
         Me.btnDelivered.Name = "btnDelivered"
         Me.btnDelivered.Size = New System.Drawing.Size(103, 42)
-        Me.btnDelivered.TabIndex = 32
+        Me.btnDelivered.TabIndex = 33
         Me.btnDelivered.Text = "&Delivered"
         Me.btnDelivered.UseVisualStyleBackColor = True
         '
@@ -458,7 +464,7 @@ Partial Class frmOrder
         Me.GroupBox1.Controls.Add(Me.TabControl1)
         Me.GroupBox1.Location = New System.Drawing.Point(533, 84)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(493, 317)
+        Me.GroupBox1.Size = New System.Drawing.Size(615, 317)
         Me.GroupBox1.TabIndex = 33
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "GroupBox1"
@@ -471,7 +477,7 @@ Partial Class frmOrder
         Me.TabControl1.Location = New System.Drawing.Point(0, 19)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(487, 292)
+        Me.TabControl1.Size = New System.Drawing.Size(609, 292)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -481,7 +487,7 @@ Partial Class frmOrder
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(479, 266)
+        Me.TabPage1.Size = New System.Drawing.Size(601, 266)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Order"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -502,7 +508,7 @@ Partial Class frmOrder
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.DataGridView1.Location = New System.Drawing.Point(3, 38)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(473, 225)
+        Me.DataGridView1.Size = New System.Drawing.Size(595, 225)
         Me.DataGridView1.TabIndex = 0
         '
         'TabPage3
@@ -513,8 +519,8 @@ Partial Class frmOrder
         Me.TabPage3.Controls.Add(Me.Label32)
         Me.TabPage3.Controls.Add(Me.txtTtl)
         Me.TabPage3.Controls.Add(Me.Label31)
-        Me.TabPage3.Controls.Add(Me.btnPrint)
         Me.TabPage3.Controls.Add(Me.txtOST)
+        Me.TabPage3.Controls.Add(Me.btnCheck)
         Me.TabPage3.Controls.Add(Me.Label30)
         Me.TabPage3.Controls.Add(Me.Label29)
         Me.TabPage3.Controls.Add(Me.txtST5)
@@ -553,15 +559,15 @@ Partial Class frmOrder
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(479, 266)
+        Me.TabPage3.Size = New System.Drawing.Size(601, 266)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Print"
+        Me.TabPage3.Text = "Cart"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'txtRef
         '
         Me.txtRef.BackColor = System.Drawing.SystemColors.Window
-        Me.txtRef.Location = New System.Drawing.Point(109, 93)
+        Me.txtRef.Location = New System.Drawing.Point(200, 81)
         Me.txtRef.Name = "txtRef"
         Me.txtRef.ReadOnly = True
         Me.txtRef.Size = New System.Drawing.Size(100, 20)
@@ -571,7 +577,7 @@ Partial Class frmOrder
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(66, 96)
+        Me.Label33.Location = New System.Drawing.Point(157, 84)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(44, 13)
         Me.Label33.TabIndex = 41
@@ -580,7 +586,7 @@ Partial Class frmOrder
         'txtTx
         '
         Me.txtTx.BackColor = System.Drawing.SystemColors.Window
-        Me.txtTx.Location = New System.Drawing.Point(395, 201)
+        Me.txtTx.Location = New System.Drawing.Point(502, 195)
         Me.txtTx.Name = "txtTx"
         Me.txtTx.ReadOnly = True
         Me.txtTx.Size = New System.Drawing.Size(78, 20)
@@ -590,7 +596,7 @@ Partial Class frmOrder
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(370, 204)
+        Me.Label32.Location = New System.Drawing.Point(477, 198)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(28, 13)
         Me.Label32.TabIndex = 38
@@ -599,7 +605,7 @@ Partial Class frmOrder
         'txtTtl
         '
         Me.txtTtl.BackColor = System.Drawing.SystemColors.Window
-        Me.txtTtl.Location = New System.Drawing.Point(395, 229)
+        Me.txtTtl.Location = New System.Drawing.Point(502, 236)
         Me.txtTtl.Name = "txtTtl"
         Me.txtTtl.ReadOnly = True
         Me.txtTtl.Size = New System.Drawing.Size(78, 20)
@@ -609,7 +615,7 @@ Partial Class frmOrder
         'Label31
         '
         Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(364, 232)
+        Me.Label31.Location = New System.Drawing.Point(471, 239)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(34, 13)
         Me.Label31.TabIndex = 36
@@ -618,7 +624,7 @@ Partial Class frmOrder
         'txtOST
         '
         Me.txtOST.BackColor = System.Drawing.SystemColors.Window
-        Me.txtOST.Location = New System.Drawing.Point(395, 172)
+        Me.txtOST.Location = New System.Drawing.Point(502, 166)
         Me.txtOST.Name = "txtOST"
         Me.txtOST.ReadOnly = True
         Me.txtOST.Size = New System.Drawing.Size(78, 20)
@@ -628,7 +634,7 @@ Partial Class frmOrder
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(313, 175)
+        Me.Label30.Location = New System.Drawing.Point(420, 169)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(85, 13)
         Me.Label30.TabIndex = 34
@@ -637,7 +643,7 @@ Partial Class frmOrder
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(197, 7)
+        Me.Label29.Location = New System.Drawing.Point(236, 6)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(147, 13)
         Me.Label29.TabIndex = 33
@@ -646,7 +652,7 @@ Partial Class frmOrder
         'txtST5
         '
         Me.txtST5.BackColor = System.Drawing.SystemColors.Window
-        Me.txtST5.Location = New System.Drawing.Point(249, 242)
+        Me.txtST5.Location = New System.Drawing.Point(341, 236)
         Me.txtST5.Name = "txtST5"
         Me.txtST5.ReadOnly = True
         Me.txtST5.Size = New System.Drawing.Size(64, 20)
@@ -656,7 +662,7 @@ Partial Class frmOrder
         'txtST4
         '
         Me.txtST4.BackColor = System.Drawing.SystemColors.Window
-        Me.txtST4.Location = New System.Drawing.Point(249, 216)
+        Me.txtST4.Location = New System.Drawing.Point(341, 210)
         Me.txtST4.Name = "txtST4"
         Me.txtST4.ReadOnly = True
         Me.txtST4.Size = New System.Drawing.Size(64, 20)
@@ -666,7 +672,7 @@ Partial Class frmOrder
         'txtST3
         '
         Me.txtST3.BackColor = System.Drawing.SystemColors.Window
-        Me.txtST3.Location = New System.Drawing.Point(249, 190)
+        Me.txtST3.Location = New System.Drawing.Point(341, 184)
         Me.txtST3.Name = "txtST3"
         Me.txtST3.ReadOnly = True
         Me.txtST3.Size = New System.Drawing.Size(64, 20)
@@ -676,7 +682,7 @@ Partial Class frmOrder
         'txtST2
         '
         Me.txtST2.BackColor = System.Drawing.SystemColors.Window
-        Me.txtST2.Location = New System.Drawing.Point(249, 162)
+        Me.txtST2.Location = New System.Drawing.Point(341, 156)
         Me.txtST2.Name = "txtST2"
         Me.txtST2.ReadOnly = True
         Me.txtST2.Size = New System.Drawing.Size(64, 20)
@@ -686,7 +692,7 @@ Partial Class frmOrder
         'txtST1
         '
         Me.txtST1.BackColor = System.Drawing.SystemColors.Window
-        Me.txtST1.Location = New System.Drawing.Point(249, 135)
+        Me.txtST1.Location = New System.Drawing.Point(341, 129)
         Me.txtST1.Name = "txtST1"
         Me.txtST1.ReadOnly = True
         Me.txtST1.Size = New System.Drawing.Size(64, 20)
@@ -696,7 +702,7 @@ Partial Class frmOrder
         'txtP5
         '
         Me.txtP5.BackColor = System.Drawing.SystemColors.Window
-        Me.txtP5.Location = New System.Drawing.Point(179, 242)
+        Me.txtP5.Location = New System.Drawing.Point(271, 236)
         Me.txtP5.Name = "txtP5"
         Me.txtP5.ReadOnly = True
         Me.txtP5.Size = New System.Drawing.Size(44, 20)
@@ -706,7 +712,7 @@ Partial Class frmOrder
         'txtP4
         '
         Me.txtP4.BackColor = System.Drawing.SystemColors.Window
-        Me.txtP4.Location = New System.Drawing.Point(179, 216)
+        Me.txtP4.Location = New System.Drawing.Point(271, 210)
         Me.txtP4.Name = "txtP4"
         Me.txtP4.ReadOnly = True
         Me.txtP4.Size = New System.Drawing.Size(44, 20)
@@ -716,7 +722,7 @@ Partial Class frmOrder
         'txtP3
         '
         Me.txtP3.BackColor = System.Drawing.SystemColors.Window
-        Me.txtP3.Location = New System.Drawing.Point(179, 190)
+        Me.txtP3.Location = New System.Drawing.Point(271, 184)
         Me.txtP3.Name = "txtP3"
         Me.txtP3.ReadOnly = True
         Me.txtP3.Size = New System.Drawing.Size(44, 20)
@@ -726,7 +732,7 @@ Partial Class frmOrder
         'txtP2
         '
         Me.txtP2.BackColor = System.Drawing.SystemColors.Window
-        Me.txtP2.Location = New System.Drawing.Point(179, 162)
+        Me.txtP2.Location = New System.Drawing.Point(271, 156)
         Me.txtP2.Name = "txtP2"
         Me.txtP2.ReadOnly = True
         Me.txtP2.Size = New System.Drawing.Size(44, 20)
@@ -736,7 +742,7 @@ Partial Class frmOrder
         'txtP1
         '
         Me.txtP1.BackColor = System.Drawing.SystemColors.Window
-        Me.txtP1.Location = New System.Drawing.Point(179, 136)
+        Me.txtP1.Location = New System.Drawing.Point(271, 130)
         Me.txtP1.Name = "txtP1"
         Me.txtP1.ReadOnly = True
         Me.txtP1.Size = New System.Drawing.Size(44, 20)
@@ -746,7 +752,7 @@ Partial Class frmOrder
         'txtQ5
         '
         Me.txtQ5.BackColor = System.Drawing.SystemColors.Window
-        Me.txtQ5.Location = New System.Drawing.Point(101, 241)
+        Me.txtQ5.Location = New System.Drawing.Point(193, 235)
         Me.txtQ5.Name = "txtQ5"
         Me.txtQ5.ReadOnly = True
         Me.txtQ5.Size = New System.Drawing.Size(28, 20)
@@ -756,7 +762,7 @@ Partial Class frmOrder
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(18, 244)
+        Me.Label28.Location = New System.Drawing.Point(110, 238)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(29, 13)
         Me.Label28.TabIndex = 21
@@ -765,7 +771,7 @@ Partial Class frmOrder
         'txtQ4
         '
         Me.txtQ4.BackColor = System.Drawing.SystemColors.Window
-        Me.txtQ4.Location = New System.Drawing.Point(101, 215)
+        Me.txtQ4.Location = New System.Drawing.Point(193, 209)
         Me.txtQ4.Name = "txtQ4"
         Me.txtQ4.ReadOnly = True
         Me.txtQ4.Size = New System.Drawing.Size(28, 20)
@@ -775,7 +781,7 @@ Partial Class frmOrder
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(18, 218)
+        Me.Label26.Location = New System.Drawing.Point(110, 212)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(28, 13)
         Me.Label26.TabIndex = 19
@@ -784,7 +790,7 @@ Partial Class frmOrder
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(17, 189)
+        Me.Label27.Location = New System.Drawing.Point(109, 183)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(29, 13)
         Me.Label27.TabIndex = 18
@@ -793,7 +799,7 @@ Partial Class frmOrder
         'txtQ3
         '
         Me.txtQ3.BackColor = System.Drawing.SystemColors.Window
-        Me.txtQ3.Location = New System.Drawing.Point(101, 189)
+        Me.txtQ3.Location = New System.Drawing.Point(193, 183)
         Me.txtQ3.Name = "txtQ3"
         Me.txtQ3.ReadOnly = True
         Me.txtQ3.Size = New System.Drawing.Size(28, 20)
@@ -803,7 +809,7 @@ Partial Class frmOrder
         'txtQ2
         '
         Me.txtQ2.BackColor = System.Drawing.SystemColors.Window
-        Me.txtQ2.Location = New System.Drawing.Point(101, 161)
+        Me.txtQ2.Location = New System.Drawing.Point(193, 155)
         Me.txtQ2.Name = "txtQ2"
         Me.txtQ2.ReadOnly = True
         Me.txtQ2.Size = New System.Drawing.Size(28, 20)
@@ -813,7 +819,7 @@ Partial Class frmOrder
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(252, 116)
+        Me.Label25.Location = New System.Drawing.Point(344, 110)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(53, 13)
         Me.Label25.TabIndex = 15
@@ -822,7 +828,7 @@ Partial Class frmOrder
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(183, 116)
+        Me.Label24.Location = New System.Drawing.Point(275, 110)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(31, 13)
         Me.Label24.TabIndex = 14
@@ -831,7 +837,7 @@ Partial Class frmOrder
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(92, 116)
+        Me.Label23.Location = New System.Drawing.Point(184, 110)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(46, 13)
         Me.Label23.TabIndex = 13
@@ -840,7 +846,7 @@ Partial Class frmOrder
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(17, 115)
+        Me.Label22.Location = New System.Drawing.Point(109, 109)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(27, 13)
         Me.Label22.TabIndex = 12
@@ -849,7 +855,7 @@ Partial Class frmOrder
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(15, 163)
+        Me.Label20.Location = New System.Drawing.Point(107, 157)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(38, 13)
         Me.Label20.TabIndex = 11
@@ -858,7 +864,7 @@ Partial Class frmOrder
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(6, 136)
+        Me.Label21.Location = New System.Drawing.Point(98, 130)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(52, 13)
         Me.Label21.TabIndex = 10
@@ -867,7 +873,7 @@ Partial Class frmOrder
         'txtQ1
         '
         Me.txtQ1.BackColor = System.Drawing.SystemColors.Window
-        Me.txtQ1.Location = New System.Drawing.Point(101, 135)
+        Me.txtQ1.Location = New System.Drawing.Point(193, 129)
         Me.txtQ1.Name = "txtQ1"
         Me.txtQ1.ReadOnly = True
         Me.txtQ1.Size = New System.Drawing.Size(28, 20)
@@ -877,7 +883,7 @@ Partial Class frmOrder
         'txtOrdertime
         '
         Me.txtOrdertime.BackColor = System.Drawing.SystemColors.Window
-        Me.txtOrdertime.Location = New System.Drawing.Point(345, 55)
+        Me.txtOrdertime.Location = New System.Drawing.Point(384, 57)
         Me.txtOrdertime.Name = "txtOrdertime"
         Me.txtOrdertime.ReadOnly = True
         Me.txtOrdertime.Size = New System.Drawing.Size(100, 20)
@@ -887,7 +893,7 @@ Partial Class frmOrder
         'txtOrderdate
         '
         Me.txtOrderdate.BackColor = System.Drawing.SystemColors.Window
-        Me.txtOrderdate.Location = New System.Drawing.Point(345, 32)
+        Me.txtOrderdate.Location = New System.Drawing.Point(384, 31)
         Me.txtOrderdate.Name = "txtOrderdate"
         Me.txtOrderdate.ReadOnly = True
         Me.txtOrderdate.Size = New System.Drawing.Size(100, 20)
@@ -897,7 +903,7 @@ Partial Class frmOrder
         'txtCustphone
         '
         Me.txtCustphone.BackColor = System.Drawing.SystemColors.Window
-        Me.txtCustphone.Location = New System.Drawing.Point(109, 69)
+        Me.txtCustphone.Location = New System.Drawing.Point(200, 57)
         Me.txtCustphone.Name = "txtCustphone"
         Me.txtCustphone.ReadOnly = True
         Me.txtCustphone.Size = New System.Drawing.Size(100, 20)
@@ -907,7 +913,7 @@ Partial Class frmOrder
         'txtCustname
         '
         Me.txtCustname.BackColor = System.Drawing.SystemColors.Window
-        Me.txtCustname.Location = New System.Drawing.Point(109, 43)
+        Me.txtCustname.Location = New System.Drawing.Point(200, 31)
         Me.txtCustname.Name = "txtCustname"
         Me.txtCustname.ReadOnly = True
         Me.txtCustname.Size = New System.Drawing.Size(100, 20)
@@ -917,7 +923,7 @@ Partial Class frmOrder
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(25, 46)
+        Me.Label16.Location = New System.Drawing.Point(116, 34)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(85, 13)
         Me.Label16.TabIndex = 3
@@ -926,7 +932,7 @@ Partial Class frmOrder
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(22, 71)
+        Me.Label17.Location = New System.Drawing.Point(113, 59)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(88, 13)
         Me.Label17.TabIndex = 4
@@ -935,7 +941,7 @@ Partial Class frmOrder
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(286, 35)
+        Me.Label18.Location = New System.Drawing.Point(325, 34)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(62, 13)
         Me.Label18.TabIndex = 5
@@ -944,11 +950,11 @@ Partial Class frmOrder
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(284, 59)
+        Me.Label19.Location = New System.Drawing.Point(325, 61)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(65, 13)
+        Me.Label19.Size = New System.Drawing.Size(62, 13)
         Me.Label19.TabIndex = 7
-        Me.Label19.Text = "Order Time :"
+        Me.Label19.Text = "Order Time:"
         '
         'TabPage2
         '
@@ -957,9 +963,9 @@ Partial Class frmOrder
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(479, 266)
+        Me.TabPage2.Size = New System.Drawing.Size(601, 266)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Receipt"
+        Me.TabPage2.Text = "Receipt Preview"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'txtReceipt
@@ -967,7 +973,8 @@ Partial Class frmOrder
         Me.txtReceipt.Location = New System.Drawing.Point(3, 4)
         Me.txtReceipt.Multiline = True
         Me.txtReceipt.Name = "txtReceipt"
-        Me.txtReceipt.Size = New System.Drawing.Size(473, 259)
+        Me.txtReceipt.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtReceipt.Size = New System.Drawing.Size(595, 259)
         Me.txtReceipt.TabIndex = 0
         '
         'GroupBox2
@@ -1098,23 +1105,64 @@ Partial Class frmOrder
         Me.txtCustomerID.Size = New System.Drawing.Size(110, 24)
         Me.txtCustomerID.TabIndex = 1
         '
-        'btnPrint2
+        'btnAddcart
         '
-        Me.btnPrint2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnPrint2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint2.Location = New System.Drawing.Point(355, 408)
-        Me.btnPrint2.Name = "btnPrint2"
-        Me.btnPrint2.Size = New System.Drawing.Size(103, 42)
-        Me.btnPrint2.TabIndex = 37
-        Me.btnPrint2.Text = "&Check"
-        Me.btnPrint2.UseVisualStyleBackColor = True
+        Me.btnAddcart.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnAddcart.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddcart.Location = New System.Drawing.Point(355, 408)
+        Me.btnAddcart.Name = "btnAddcart"
+        Me.btnAddcart.Size = New System.Drawing.Size(103, 42)
+        Me.btnAddcart.TabIndex = 29
+        Me.btnAddcart.Text = "&Add Cart"
+        Me.btnAddcart.UseVisualStyleBackColor = True
+        '
+        'PrintDialog1
+        '
+        Me.PrintDialog1.UseEXDialog = True
+        '
+        'PrintPreviewDialog1
+        '
+        Me.PrintPreviewDialog1.AutoScrollMargin = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.AutoScrollMinSize = New System.Drawing.Size(0, 0)
+        Me.PrintPreviewDialog1.ClientSize = New System.Drawing.Size(400, 300)
+        Me.PrintPreviewDialog1.Document = Me.PrintDocument1
+        Me.PrintPreviewDialog1.Enabled = True
+        Me.PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), System.Drawing.Icon)
+        Me.PrintPreviewDialog1.Name = "PrintPreviewDialog1"
+        Me.PrintPreviewDialog1.Visible = False
+        '
+        'PrintDocument1
+        '
+        '
+        'btnCustomerIns
+        '
+        Me.btnCustomerIns.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCustomerIns.Location = New System.Drawing.Point(98, 545)
+        Me.btnCustomerIns.Name = "btnCustomerIns"
+        Me.btnCustomerIns.Size = New System.Drawing.Size(117, 26)
+        Me.btnCustomerIns.TabIndex = 38
+        Me.btnCustomerIns.Text = "&Add Customer Intead"
+        Me.btnCustomerIns.UseVisualStyleBackColor = True
+        '
+        'btnPrint
+        '
+        Me.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPrint.Location = New System.Drawing.Point(189, 461)
+        Me.btnPrint.Name = "btnPrint"
+        Me.btnPrint.Size = New System.Drawing.Size(103, 42)
+        Me.btnPrint.TabIndex = 32
+        Me.btnPrint.Text = "&Print"
+        Me.btnPrint.UseVisualStyleBackColor = True
         '
         'frmOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1038, 599)
-        Me.Controls.Add(Me.btnPrint2)
+        Me.ClientSize = New System.Drawing.Size(1160, 599)
+        Me.Controls.Add(Me.btnPrint)
+        Me.Controls.Add(Me.btnCustomerIns)
+        Me.Controls.Add(Me.btnAddcart)
         Me.Controls.Add(Me.txtCustomerID)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.btnBack)
@@ -1196,7 +1244,7 @@ Partial Class frmOrder
     Friend WithEvents txtSubTotal1 As TextBox
     Friend WithEvents btnTotal As Button
     Friend WithEvents btnSave As Button
-    Friend WithEvents btnPrint As Button
+    Friend WithEvents btnCheck As Button
     Friend WithEvents btnReset As Button
     Friend WithEvents btnDelivered As Button
     Friend WithEvents GroupBox1 As GroupBox
@@ -1261,5 +1309,10 @@ Partial Class frmOrder
     Friend WithEvents txtRef As TextBox
     Friend WithEvents Label33 As Label
     Friend WithEvents txtCashierID As TextBox
-    Friend WithEvents btnPrint2 As Button
+    Friend WithEvents btnAddcart As Button
+    Friend WithEvents PrintDialog1 As PrintDialog
+    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents btnCustomerIns As Button
+    Friend WithEvents btnPrint As Button
 End Class

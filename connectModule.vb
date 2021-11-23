@@ -7,7 +7,7 @@ Module connectModule
     Public myReader As OleDbDataReader
 
     Sub OpenCon()
-        con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\karll\source\repos\PRC2-Midterms\bin\Debug\orderingSystemDb.mdb;"
+        con.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\karll\source\repos\PRC2-Midterms\bin\Debug\orderingSystemDbNew.mdb;"
         con.Open()
     End Sub
 

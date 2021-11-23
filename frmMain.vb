@@ -41,7 +41,7 @@ Public Class frmMain
         con.Close()
     End Sub
 
-    'LOADER
+    'LOADER OF CASHIER ID AND CASHIER FULLNAME
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call cashierName()
         Call cashierID()
