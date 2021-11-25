@@ -96,18 +96,18 @@ Public Class frmCustomer
         Call LoadTables()
     End Sub
 
-    'LOAD BUTTON
+    'BUTTON LOAD 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         Call LoadTables()
     End Sub
 
-    'BACK BUTTON
+    'BUTTON BACK
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
         Me.Hide()
         frmMain.Show()
     End Sub
 
-    'INSERT BUTTON
+    'BUTTON INSERT
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -138,7 +138,7 @@ Public Class frmCustomer
         End If
     End Sub
 
-    'UPDATE BUTTON
+    'BUTTON UPDATE
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -177,7 +177,7 @@ Public Class frmCustomer
         Call LoadTables()
     End Sub
 
-    'DELETE BUTTON
+    'BUTTON DELETE
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If con.State = ConnectionState.Closed Then
             OpenCon()
@@ -212,7 +212,7 @@ Public Class frmCustomer
         End If
     End Sub
 
-    'SEARCH BUTTON
+    'BUTTON SEARCH
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Try
             If txtSearch.Text = "" Then

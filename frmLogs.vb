@@ -1,5 +1,6 @@
 ﻿Public Class frmLogs
 
+    'LOAD TABLE FUNCTION
     Private Sub LoadTables(Optional ByVal q As String = "")
         Try
             If con.State = ConnectionState.Closed Then
@@ -69,15 +70,7 @@
         con.Close()
     End Sub
 
-    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
-        Me.Hide()
-        frmMain.Show()
-    End Sub
-
-    Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
-        Call LoadTables()
-    End Sub
-
+    'BUTTON FIND
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
         Try
             If txtSearch.Text = "" Then
@@ -97,6 +90,17 @@
             MessageBox.Show(ex.ToString)
         End Try
         con.Close()
+    End Sub
+
+    'BUTTON LOAD
+    Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
+        Call LoadTables()
+    End Sub
+
+    'BUTTON BACK
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+        Me.Hide()
+        frmMain.Show()
     End Sub
 
 End Class
