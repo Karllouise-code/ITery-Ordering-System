@@ -444,7 +444,7 @@ Partial Class frmOrder
         Me.btnReset.Location = New System.Drawing.Point(27, 383)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(79, 38)
-        Me.btnReset.TabIndex = 34
+        Me.btnReset.TabIndex = 35
         Me.btnReset.Text = "&Reset"
         Me.btnReset.UseVisualStyleBackColor = True
         '
@@ -455,7 +455,7 @@ Partial Class frmOrder
         Me.btnDelivered.Location = New System.Drawing.Point(298, 461)
         Me.btnDelivered.Name = "btnDelivered"
         Me.btnDelivered.Size = New System.Drawing.Size(103, 42)
-        Me.btnDelivered.TabIndex = 33
+        Me.btnDelivered.TabIndex = 34
         Me.btnDelivered.Text = "&Delivered"
         Me.btnDelivered.UseVisualStyleBackColor = True
         '
@@ -1151,7 +1151,7 @@ Partial Class frmOrder
         Me.btnPrint.Location = New System.Drawing.Point(189, 461)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(103, 42)
-        Me.btnPrint.TabIndex = 32
+        Me.btnPrint.TabIndex = 33
         Me.btnPrint.Text = "&Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
