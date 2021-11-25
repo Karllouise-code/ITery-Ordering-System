@@ -31,6 +31,7 @@ Partial Class frmMain
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.txtCashierID = New System.Windows.Forms.TextBox()
+        Me.btnLogs = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -61,7 +62,7 @@ Partial Class frmMain
         Me.btnCustomer.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnCustomer.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCustomer.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.btnCustomer.Location = New System.Drawing.Point(448, 54)
+        Me.btnCustomer.Location = New System.Drawing.Point(448, 41)
         Me.btnCustomer.Name = "btnCustomer"
         Me.btnCustomer.Size = New System.Drawing.Size(179, 68)
         Me.btnCustomer.TabIndex = 2
@@ -74,7 +75,7 @@ Partial Class frmMain
         Me.btnOrder.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnOrder.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.btnOrder.Location = New System.Drawing.Point(448, 128)
+        Me.btnOrder.Location = New System.Drawing.Point(448, 115)
         Me.btnOrder.Name = "btnOrder"
         Me.btnOrder.Size = New System.Drawing.Size(179, 68)
         Me.btnOrder.TabIndex = 3
@@ -87,7 +88,7 @@ Partial Class frmMain
         Me.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogout.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.SystemColors.Desktop
-        Me.btnLogout.Location = New System.Drawing.Point(448, 256)
+        Me.btnLogout.Location = New System.Drawing.Point(448, 293)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(179, 68)
         Me.btnLogout.TabIndex = 4
@@ -125,11 +126,25 @@ Partial Class frmMain
         Me.txtCashierID.TabStop = False
         Me.txtCashierID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'btnLogs
+        '
+        Me.btnLogs.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.btnLogs.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLogs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogs.ForeColor = System.Drawing.SystemColors.Desktop
+        Me.btnLogs.Location = New System.Drawing.Point(448, 189)
+        Me.btnLogs.Name = "btnLogs"
+        Me.btnLogs.Size = New System.Drawing.Size(179, 68)
+        Me.btnLogs.TabIndex = 39
+        Me.btnLogs.Text = "&Logs"
+        Me.btnLogs.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(793, 377)
+        Me.Controls.Add(Me.btnLogs)
         Me.Controls.Add(Me.txtCashierID)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
@@ -155,4 +170,5 @@ Partial Class frmMain
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents txtCashierID As TextBox
+    Friend WithEvents btnLogs As Button
 End Class

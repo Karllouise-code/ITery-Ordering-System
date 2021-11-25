@@ -59,6 +59,12 @@ Public Class frmMain
         frmOrder.Show()
     End Sub
 
+    'BUTTON LOGS
+    Private Sub btnLogs_Click(sender As Object, e As EventArgs) Handles btnLogs.Click
+        Me.Hide()
+        frmLogs.Show()
+    End Sub
+
     'BUTTON LOGOUT
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         frmLogin.txtUsername.Clear()
