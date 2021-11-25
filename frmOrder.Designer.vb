@@ -495,7 +495,7 @@ Partial Class frmOrder
         'btnLoad
         '
         Me.btnLoad.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnLoad.Location = New System.Drawing.Point(396, 7)
+        Me.btnLoad.Location = New System.Drawing.Point(511, 7)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(77, 26)
         Me.btnLoad.TabIndex = 37

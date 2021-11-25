@@ -76,7 +76,20 @@ Public Class frmOrder
         txtOST.Text = myReader("Order_Sub_Total")
         txtTx.Text = myReader("Tax")
         txtTtl.Text = myReader("Total")
-        con.Close()
+    End Sub
+
+    'INSERT TBLLOGS FUNCTION
+    Private Sub InserttblLogs(Optional ByVal q As String = "")
+        Try
+            query.Connection = con
+            query.CommandText = "INSERT INTO tblLogs(Cashier, Customer_Name, Customer_Phone, Order_Date, Order_Time, Order_Ref_No, Qty_Spaghetti, Qty_Burger, Qty_Fries, Qty_Cola, Qty_Rice, Price_Spaghetti, Price_Burger, Price_Fries, Price_Cola, Price_Rice, Sub_Total_Spag, Sub_Total_Burg, Sub_Total_Fries, Sub_Total_Cola, Sub_Total_Rice, Order_Sub_Total, Tax, Total) VALUES('" & frmMain.lblUsername.Text & "', '" &
+                txtCustname.Text & "', '" & txtCustphone.Text & "', '" & txtOrderdate.Text & "', '" & txtOrdertime.Text & "', '" & txtRef.Text & "', '" & txtQ1.Text & "', '" & txtQ2.Text & "', '" & txtQ3.Text & "', '" & txtQ4.Text & "', '" _
+                & txtQ5.Text & "', '" & txtP1.Text & "', '" & txtP2.Text & "', '" & txtP3.Text & "', '" & txtP4.Text & "', '" & txtP5.Text & "', '" & txtST1.Text & "', '" & txtST2.Text & "', '" & txtST3.Text & "', '" & txtST4.Text & "', '" _
+                & txtST5.Text & "', '" & txtOST.Text & "', '" & txtTx.Text & "', '" & txtTtl.Text & "')"
+            query.ExecuteNonQuery()
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+        End Try
     End Sub
 
     'PRINT PAGE FUNCTION
@@ -258,8 +271,11 @@ Public Class frmOrder
         If con.State = ConnectionState.Closed Then
             OpenCon()
         End If
+        Call receiptData()
         If txtCustomerID.Text = "" Then
             MessageBox.Show("Please input a Customer ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        ElseIf txtQ1.Text = "" Then
+            MessageBox.Show("Customer Does not have any order", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Else
             Try
                 Using cmd As New OleDbCommand("Select COUNT(*) FROM tblOrders WHERE [Customer_ID] = @Customer_ID", con)
@@ -268,6 +284,7 @@ Public Class frmOrder
                     If count > 0 Then
                         TabControl1.SelectedTab = TabPage1
                         query.Connection = con
+                        Call InserttblLogs()
                         query.CommandText = "UPDATE tblOrders SET Order_Ref_No = '" & Nothing & "', Qty_Spaghetti = '" & Nothing & "', Qty_Burger = '" & Nothing & "', Qty_Fries = '" & Nothing & "', Qty_Cola = '" & Nothing & "', Qty_Rice = '" & Nothing & "', Price_Spaghetti = '" & Nothing & "', Price_Burger = '" & Nothing & "', Price_Fries = '" & Nothing & "', Price_Cola = '" & Nothing & "', Price_Rice = '" & Nothing & "', Sub_Total_Spag = '" & Nothing & "', Sub_Total_Burg = '" & Nothing & "', Sub_Total_Fries = '" & Nothing & "', Sub_Total_Cola = '" & Nothing & "', Sub_Total_Rice = '" & Nothing & "', Order_Sub_Total = '" & Nothing & "', Tax = '" & Nothing & "', Total = '" & Nothing & "'  WHERE Customer_ID = " & txtCustomerID.Text & ""
                         query.ExecuteNonQuery()
                         MessageBox.Show("Successfully Delivered!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -298,6 +315,7 @@ Public Class frmOrder
                 Call receiptData()
                 TabPage3.Enabled = True
                 isSave = False
+                con.Close()
             Catch ex As Exception
                 MessageBox.Show(ex.ToString)
             End Try

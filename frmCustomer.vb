@@ -246,6 +246,7 @@ Public Class frmCustomer
         txtOrdertime.Text = TimeOfDay
     End Sub
 
+    'BUTTON ORDER INSTEAD
     Private Sub btnOrderIns_Click(sender As Object, e As EventArgs) Handles btnOrderIns.Click
         Me.Hide()
         frmOrder.Show()
